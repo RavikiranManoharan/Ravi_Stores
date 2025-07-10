@@ -302,7 +302,7 @@ console.log('Found at:', foundPath);
 			
 			const { execFile } = require('child_process');
 
-			execFile(foundPath, (error, stdout, stderr) => {
+			execFile(app2.exe, (error, stdout, stderr) => {
 			if (error) {
 				console.error('Execution error:', error);
 			    	return;
