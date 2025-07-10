@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Ravi Stores</title>
+	<link rel="icon" href='/icn' type="image/x-icon" />
+</head>
+
+<bodY>
+		
+		<center>
+			
+			<br>
+			
+			<h1 id="title1">Ravi Stores</h1>
+			
+			<br><br><br>
+			<div id="maindiv">
+				
+				<label>Serial Number:</label>
+				<input id="slno" type="number" value={{sln}} readonly>
+				
+				<br>
+				<br>
+				<br>
+				
+				<label>Name:</label>
+				<input id="name" type="text" placeholder="Enter your name">
+				
+				<br>
+				<br>
+				<br>
+				
+				<label>Phone Number:</label>
+				<input id="phn" type="number">
+				
+				<br>
+				<br>
+				<br>
+				
+				<label>No of items: </label>
+				<input id="noits" type="number">
+				
+				<br>
+				<br>
+				<br>
+				
+				<button id="crtlst" onclick="crtlst1()">Create List</button>
+				
+				<br>
+				
+				
+				
+			</div>
+		
+		<div id="form">
+					
+				<br>
+			<button type="submit" id="host" onclick="submitdata()" style="display: none">Host</button>
+				
+				<br>
+				<br>
+		</div>
+		
+		<a href="http://127.0.0.1:5000/view"><button onclick="pg2()" id="viewpg">View Data</button></a>
+		
+		<!--  -->
+		
+		</center>
+		
+		<script>
+
+		const items = []
+
+		var Name 
+
+		var Slno 
+
+		var Phn 
+
+		var restrict = 0
+
+		function crtlst1()
+		{
+			if(restrict==0)
+			{
+				var slno = document.getElementById("slno").value
+			var name = document.getElementById("name").value
+			var phn = document.getElementById("phn").value
+			var noits = document.getElementById("noits").value
+			
+			Name = name
+			
+			Slno = slno
+			
+			Phn = phn
+			
+			var inputDiv = document.getElementById("maindiv");	
+			
+			
+			inputDiv.appendChild(document.createElement('br'));
+			inputDiv.appendChild(document.createElement('br'));
+			
+			var i
+			var j
+			
+			var range = Number(noits)
+			
+			for(i=1;i<=range;i++)
+			{
+				for(j=0;j<3;j++)
+				{
+						
+					if(j==0)
+					{	
+						var inputTag = document.createElement('input');
+						inputTag.type = "text"
+						inputTag.id = `item${i}`;
+						
+						var label = document.createElement('label');
+						label.htmlFor=`item${i}`;
+						label.textContent=`Item${i}`;
+					}
+					else if(j==1)
+					{	
+						var inputTag = document.createElement('input');
+						inputTag.type = "text"
+						inputTag.id = `price${i}`;
+						
+						
+						var label = document.createElement('label');
+						label.htmlFor=`price${i}`;
+						label.textContent=`Price${i}`;
+					}
+					else if(j==2)
+					{	
+						var inputTag = document.createElement('input');
+						inputTag.type = "text"
+						inputTag.id = `quantity${i}`;
+						
+						
+						var label = document.createElement('label');
+						label.htmlFor=`quantity${i}`;
+						label.textContent=`Quantity${i}`;
+					}
+					
+					inputDiv.appendChild(label);
+				
+					inputDiv.appendChild(inputTag);
+					
+					inputDiv.appendChild(document.createElement('br'));
+					inputDiv.appendChild(document.createElement('br'));
+					
+				}
+				
+					inputDiv.appendChild(document.createElement('br'));
+					
+			}
+			
+			var btn = document.createElement('button');
+			btn.id = "packdata"
+			btn.textContent = "Pack"
+			btn.addEventListener('click',packing)
+			
+			inputDiv.appendChild(btn);
+					
+			inputDiv.appendChild(document.createElement('br'));
+			inputDiv.appendChild(document.createElement('br'));
+			inputDiv.appendChild(document.createElement('br'));
+			}
+			
+			restrict++;	
+		}
+
+		function packing()
+		{	
+			var slno = document.getElementById("slno").value
+			var name = document.getElementById("name").value
+			var phn = document.getElementById("phn").value
+			var noits = document.getElementById("noits").value
+
+			num = Number(noits)
+			
+			var i
+			var j
+			
+			for(i=1;i<=num;i++)
+			{
+				for(j=0;j<3;j++)
+				{
+						
+					if(j==0)
+					{	
+						var item = document.getElementById(`item${i}`).value;
+						items.push(item)
+					}
+					else if(j==1)
+					{	
+						var price = document.getElementById(`price${i}`).value;
+						items.push(price)
+					}
+					else if(j==2)
+					{	
+						var quantity = document.getElementById(`quantity${i}`).value;
+						items.push(quantity)
+					}
+				}
+			}
+			
+			pass_packed()
+			
+		}
+
+		function pass_packed()
+		{
+			
+			var style = document.getElementById("host").style.display = "block";
+			
+		}
+
+		async function handleFormSubmission(event)
+		{
+			event.preventDefault();
+		}
+
+		 async function submitdata()
+		 {
+			
+			handleFormSubmission(event);
+			
+			var slno = document.getElementById("slno").value
+			var Customer = document.getElementById("name").value
+			var Phone = document.getElementById("phn").value
+			var Products = items
+			
+			const data = {slno,Customer,Phone,Products};
+			
+			try {
+		  const response = await fetch('/api/bill', {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(data)
+		  });
+
+		  const result = await response.json();
+
+		} catch (error) {
+		  console.error('Something went wrong:', error);
+		}
+		
+		setTimeout(function(){
+				
+				window.location.href = 'http://127.0.0.1:5000/price'
+				
+				},500)
+			
+
+		}
+		
+		async function pg2()
+		{
+			await fetch('/view')
+		}
+		
+		/*
+		
+		dumps
+		
+			
+			async function fetchData(data)
+			{
+			
+				if( await fetch('/submit'))
+				{
+					const fet = {method:'POST',headers:{'content-type':'application/json'},body: JSON.stringify(data)}
+				}
+			
+				return fet
+			}
+			 
+			const response = fetchData()
+			
+			const result = response.json();
+			console.log(result);
+		
+		async function price()
+		{
+			var price = document.getElementById("price");
+			
+			const prs = await fetch('/price')
+			
+			if(!price.ok) throw new Error("cant fetch");
+				
+			const data = await price.json()
+			
+			console.log(data)
+			
+		}
+			
+		*/
+		
+		</script>
+		
+		<style>
+	
+		
+			body
+			{
+				background-color: linen;
+				color: lightsteelblue;
+				font-family: Papyrus;
+				-webkit-text-stroke: .1px slategrey;
+				font-weight: bold;
+				font-size: 20px;
+				text-shadow: 1px 1px 2px black;
+			}
+			#title1{
+			
+			text-shadow: 2px 2px 3px black;
+			-webkit-text-stroke: .1px slategrey;
+			font-size: 55px;
+				
+			}
+
+			input{
+				
+			background-color: linen;
+			border-color: slategrey;
+			width: 233px;
+			height: 40px;
+			border-radius: 15px;
+			padding: 5px 5px 5px;
+			color: black;
+			font-size: 20px;
+			font-family: papyrus;
+			-webkit-text-stroke: .1px lightsteelblue;
+			text-shadow: 1px 1px 1px black;
+			}
+			button{
+			font-family: Papyrus;
+			background-color: linen;
+			border-color: slategrey;
+			color: lightsteelblue;
+			box-shadow: 2px 2px 4px black;
+			-webkit-text-stroke: .3px slategrey;
+			font-weight: bold;
+			border-radius: 15px;
+			font-size: 20px;
+			width: 150px;
+			height: 50px;
+			
+			}
+	
+	</style>
+	
+</bodY>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Ravi Stores</title>
+	<link rel="icon" href='/icn' type="image/x-icon" />
+</head>
+
+<body>
+
+	<center>
+	
+		<br>
+			
+			<h1 id="title1">Ravi Stores</h1>
+			
+			<br><br>
+			
+			<h1 id='name'>{{name}}</h1>
+			<br>
+			<h1 id='name'>Rs. {{pric}}</h1>
+			<br>
+			<h1 id='name'>Products: {{pro}}</h1>
+			<br>
+			
+			<button onclick="back()">Paid</button>
+			
+	
+	</center>
+	
+	<script>
+		
+		function back()
+		{
+			window.location = 'http://127.0.0.1:5000'
+		}
+		
+	</script>
+		
+		<style>
+	
+		
+			body
+			{
+				background-color: linen;
+				color: lightsteelblue;
+				font-family: Papyrus;
+				-webkit-text-stroke: .1px slategrey;
+				font-weight: bold;
+				font-size: 20px;
+				text-shadow: 1px 1px 2px black;
+			}
+			#title1{
+			
+			text-shadow: 2px 2px 3px black;
+			-webkit-text-stroke: .1px slategrey;
+			font-size: 55px;
+				
+			}
+
+			input{
+				
+			background-color: linen;
+			border-color: slategrey;
+			width: 233px;
+			height: 40px;
+			border-radius: 15px;
+			padding: 5px 5px 5px;
+			color: black;
+			font-size: 20px;
+			font-family: papyrus;
+			-webkit-text-stroke: .1px lightsteelblue;
+			text-shadow: 1px 1px 1px black;
+			}
+			button{
+			font-family: Papyrus;
+			background-color: linen;
+			border-color: slategrey;
+			color: lightsteelblue;
+			box-shadow: 2px 2px 4px black;
+			-webkit-text-stroke: .3px slategrey;
+			font-weight: bold;
+			border-radius: 15px;
+			font-size: 20px;
+			width: 150px;
+			height: 50px;
+			
+			}
+	
+	</style>
+	
+</body>

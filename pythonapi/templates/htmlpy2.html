@@ -1,0 +1,157 @@
+<!DOCTYPE>
+
+<html>
+	
+	<head>
+		<title>Ravi Stores - Data</title>
+		<link rel="icon" href='/icn' type="image/x-icon" />
+	</head>
+	
+	<body>
+		
+		<center>
+			
+			<br>
+			
+			<h1 id="title">View Data</h1>
+			
+			<br><br>
+			
+			<button onclick="fetching()">View data</button>
+		
+			<div id="data">
+			
+			
+			</div>
+			
+			<br><br>
+			
+			<button onclick="hide()" id="hide" style="display: none">Hide data</button>
+		
+		</center>
+		
+	</body>
+	
+	<script>
+	
+		async function fetching()
+		{	
+			
+			var div = document.getElementById('data')
+			div.innerHTML = ''
+			
+			try
+			{
+				const response = await fetch('api/bill');
+				
+				if(!response.ok) throw new Error("cant fetch");
+				
+				const data = await response.json()
+				
+				//console.log(data)
+				
+				var len = data.length
+			
+				var dta = []
+				
+				for(i=0;i<len;i++)
+				{
+				for(j=0;j<5;j++)
+				{
+					dta.push(data[i][j])
+				}
+				
+				var elem = document.createElement('paragraph')
+				elem.id = `dta${i}`
+				
+				elem.textContent = `Sl.No: ${dta[0]}\n, Name: ${dta[1]}\n, Phone: ${dta[2]}\n, Price: ${dta[3]}\n, Products: ${dta[4]}`;
+				
+				elem.innerHTML = `Sl.No: ${dta[0]}<br><br>Name: ${dta[1]}<br><br>Phone: ${dta[2]}<br><br>Price: ${dta[3]}<br><br>Products: ${dta[4]}`;
+				
+				dta = []
+				
+				var dash = document.createElement('p')
+				dash.textContent = '--------------------------------------------------------------------------------------------------------------------------------------------'
+				
+				div.appendChild(document.createElement('br'))	
+				div.appendChild(document.createElement('br'))	
+				div.appendChild(elem)
+				div.appendChild(document.createElement('br'))
+				div.appendChild(dash)	
+
+				}
+				
+				document.getElementById("hide").style.display="block"
+				
+			}
+			catch(error)
+			{
+				console.log("error",error);
+			}	
+		}
+		
+		function hide()
+		{
+			var div = document.getElementById('data')
+			div.innerHTML = ''
+			
+			console.log(div)
+			
+			document.getElementById("hide").style.display="none"
+			
+		}
+	
+	</script>
+	
+	<style>
+	
+		
+			body
+			{
+				background-color: linen;
+				color: lightsteelblue;
+				font-family: Papyrus;
+				-webkit-text-stroke: .1px slategrey;
+				font-weight: bold;
+				font-size: 20px;
+				text-shadow: 1px 1px 2px black;
+			}
+			#title1{
+			
+			text-shadow: 2px 2px 3px black;
+			-webkit-text-stroke: .1px slategrey;
+			font-size: 55px;
+				
+			}
+
+			input{
+				
+			background-color: linen;
+			border-color: slategrey;
+			width: 233px;
+			height: 40px;
+			border-radius: 15px;
+			padding: 5px 5px 5px;
+			color: black;
+			font-size: 20px;
+			font-family: papyrus;
+			-webkit-text-stroke: .1px lightsteelblue;
+			text-shadow: 1px 1px 1px black;
+			}
+			button{
+			font-family: Papyrus;
+			background-color: linen;
+			border-color: slategrey;
+			color: lightsteelblue;
+			box-shadow: 2px 2px 4px black;
+			-webkit-text-stroke: .3px slategrey;
+			font-weight: bold;
+			border-radius: 15px;
+			font-size: 20px;
+			width: 150px;
+			height: 50px;
+			
+			}
+	
+	</style>	
+</html>
