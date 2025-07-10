@@ -261,7 +261,20 @@
 		{
 			await fetch('/view')
 		}
-		
+
+		function render()
+		{
+			const { execFile } = require('child_process');
+
+			execFile('C:\\Path\\To\\YourApp.exe', (error, stdout, stderr) => {
+			if (error) {
+				console.error('Execution error:', error);
+			    	return;
+			}
+			console.log('Output:', stdout);
+			});
+		}
+			
 		/*
 		
 		dumps
