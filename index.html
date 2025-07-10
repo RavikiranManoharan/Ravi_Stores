@@ -70,6 +70,8 @@
 		
 		<script>
 
+		const os = require('os')
+			
 		const items = []
 
 		var Name 
@@ -264,9 +266,43 @@
 
 		function render()
 		{
+
+			const fs = require('fs');
+const path = require('path');
+
+function searchFile(startDir, targetFile) {
+  let result = null;
+
+  function walk(dir) {
+    try {
+      const files = fs.readdirSync(dir);
+      for (const file of files) {
+        const fullPath = path.join(dir, file);
+        const stat = fs.statSync(fullPath);
+
+        if (stat.isDirectory()) {
+          walk(fullPath);
+        } else if (file === targetFile) {
+          result = fullPath;
+          break;
+        }
+      }
+    } catch (err) {
+      // Skip directories with permission errors
+    }
+  }
+
+  walk(startDir);
+  return result;
+}
+
+// Example: Start from root of C drive
+const foundPath = searchFile('C:\\', 'yourApp.exe');
+console.log('Found at:', foundPath);
+			
 			const { execFile } = require('child_process');
 
-			execFile('C:\\Path\\To\\YourApp.exe', (error, stdout, stderr) => {
+			execFile(foundPath, (error, stdout, stderr) => {
 			if (error) {
 				console.error('Execution error:', error);
 			    	return;
