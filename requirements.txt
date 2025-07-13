@@ -1,5 +1,4 @@
 flask
-json
 webbrowser
 threading
 pymysql
