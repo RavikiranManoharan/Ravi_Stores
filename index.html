@@ -264,6 +264,43 @@
 			await fetch('/view')
 		}
 
+			
+		/*
+		
+		dumps
+		
+			
+			async function fetchData(data)
+			{
+			
+				if( await fetch('/submit'))
+				{
+					const fet = {method:'POST',headers:{'content-type':'application/json'},body: JSON.stringify(data)}
+				}
+			
+				return fet
+			}
+			 
+			const response = fetchData()
+			
+			const result = response.json();
+			console.log(result);
+		
+		async function price()
+		{
+			var price = document.getElementById("price");
+			
+			const prs = await fetch('/price')
+			
+			if(!price.ok) throw new Error("cant fetch");
+				
+			const data = await price.json()
+			
+			console.log(data)
+			
+		}
+
+		
 		function render()
 		{
 
@@ -310,42 +347,8 @@ console.log('Found at:', foundPath);
 			console.log('Output:', stdout);
 			});
 		}
-			
-		/*
-		
-		dumps
-		
-			
-			async function fetchData(data)
-			{
-			
-				if( await fetch('/submit'))
-				{
-					const fet = {method:'POST',headers:{'content-type':'application/json'},body: JSON.stringify(data)}
-				}
-			
-				return fet
-			}
-			 
-			const response = fetchData()
-			
-			const result = response.json();
-			console.log(result);
-		
-		async function price()
-		{
-			var price = document.getElementById("price");
-			
-			const prs = await fetch('/price')
-			
-			if(!price.ok) throw new Error("cant fetch");
-				
-			const data = await price.json()
-			
-			console.log(data)
-			
-		}
-			
+
+   
 		*/
 		
 		</script>
