@@ -2,4 +2,4 @@ flask
 pymysql
 dotenv 
 gunicorn
-decouple
+python-decouple
