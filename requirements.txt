@@ -1,0 +1,7 @@
+flask
+json
+webbrowser
+threading
+pymysql
+os
+dotenv 
