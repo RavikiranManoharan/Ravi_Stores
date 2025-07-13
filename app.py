@@ -29,7 +29,7 @@ def con():
 	
 	return pymysql.connect(
 		
-		host = "Ravikiran",
+		host = os.getenv("DB_HOST"),
 		user = os.getenv("DB_USER"),
 		password = val,
 		database = os.getenv("DB_DATABASE"),
