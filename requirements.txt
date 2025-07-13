@@ -3,3 +3,4 @@ pymysql
 dotenv 
 gunicorn
 python-decouple
+decryption 
